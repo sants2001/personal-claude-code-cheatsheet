@@ -96,6 +96,7 @@ footer code{color:var(--text2)}
       <button class="tab" data-tab="tokens">Tokens</button>
       <button class="tab" data-tab="models">Model Routing</button>
       <button class="tab" data-tab="catalog">Full Catalog</button>
+      <button class="tab" data-tab="how">How Claude Works</button>
     </nav>
   </div>
 </div>
@@ -186,6 +187,113 @@ footer code{color:var(--text2)}
 <thead><tr><th>Skill / Command</th><th>Description</th><th>Category</th></tr></thead>
 <tbody id="ctbd"></tbody>
 </table>
+</section>
+
+<section id="tab-how" class="panel">
+<h2>How Claude Works</h2>
+
+<div class="g2">
+
+<div>
+<div class="card" style="margin-bottom:16px">
+<div class="ct2">Context Window</div>
+<ul>
+<li>Claude reads the full conversation top-to-bottom on every turn. No memory between sessions.</li>
+<li>Primacy + recency: instructions at the start and end of the window get the most attention.</li>
+<li>Past ~70% full, performance on complex tasks degrades. Run <code>strategic-compact</code> before hitting this.</li>
+<li>Each tool call result adds to the window. Parallel tool calls are cheaper (fewer round-trips).</li>
+<li>Long CLAUDE.md wastes tokens on every turn. Keep it short.</li>
+</ul>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+<div class="ct2">How Claude Reads Requests</div>
+<ul>
+<li>Infers full output spec from partial requests using task-category defaults.</li>
+<li>"Write a report" → exec summary + KPIs + table + verdict</li>
+<li>Ambiguous format → Claude picks one and states the assumption</li>
+<li>Override by stating the output spec explicitly: "Give me just the function, no explanation."</li>
+</ul>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+<div class="ct2">Thinking Modes</div>
+<ul>
+<li><strong>Extended thinking (⌥T):</strong> internal reasoning up to 31,999 tokens. Best for architecture, complex debugging, multi-constraint problems. Skip for simple lookups and formatting.</li>
+<li><strong>Verbose thinking (Ctrl+O):</strong> shows Claude's chain of thought. Good for auditing whether Claude understood the problem.</li>
+<li>Overthinking is a failure mode too. Claude stops refining when passes stabilize.</li>
+</ul>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+<div class="ct2">Subagents and Parallel Work</div>
+<ul>
+<li>Every subagent gets its own context window. Protects main context from lengthy reads/searches.</li>
+<li>Use for: independent parallel tasks, fresh-perspective code review, long searches, tracer runs.</li>
+<li>Tracer rule: run one subagent end-to-end before dispatching a fleet. Tracer failure = fix the plan, not the prompts.</li>
+</ul>
+</div>
+</div>
+
+<div>
+<div class="card" style="margin-bottom:16px">
+<div class="ct2">Hallucination — When and Why</div>
+<p>Next-token predictor. Thin training data = fluent but potentially wrong output.</p>
+<div class="cl r" style="margin-top:8px"><div class="ct2">High-risk triggers — verify before asserting</div>
+<ul>
+<li>Library API signatures and named exports</li>
+<li>Exact file paths, line numbers, folder structure</li>
+<li>Version-specific behavior (Next.js 15 vs 14, Tailwind v3 vs v4)</li>
+<li>Named functions not read this session</li>
+<li>Dates, numbers, commit hashes</li>
+</ul>
+</div>
+<p style="margin-top:8px"><strong>Mitigations:</strong> "Read [file:line] first." / "Quote the file:line backing every claim." / "It's OK to say you don't know." / Run the build/test instead of reasoning about it.</p>
+</div>
+
+<div class="cl g" style="margin-bottom:16px"><div class="ct2">Feedback Loops (Highest Leverage)</div>
+<p>The single highest-leverage pattern: give Claude a way to verify its own work.</p>
+<ul>
+<li><strong>Unit tests:</strong> Claude runs the test, sees pass/fail, self-corrects</li>
+<li><strong>Screenshots (Playwright/Puppeteer):</strong> Claude sees rendered UI, adjusts</li>
+<li><strong>Linter/type-checker output:</strong> Claude sees errors, fixes them</li>
+<li><strong>Build output:</strong> Claude sees compile error, resolves it</li>
+</ul>
+<p>With a feedback loop, 2-3 self-iterations produce near-perfect results. Without one, Claude declares success based on reasoning alone — unreliable.</p>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+<div class="ct2">Anti-Patterns</div>
+<table class="mt">
+<thead><tr><th>Anti-pattern</th><th>What to do instead</th></tr></thead>
+<tbody>
+<tr><td>"Fix it" with no context</td><td>Provide file:line + expected vs actual</td></tr>
+<tr><td>Pasting entire large files</td><td>Cite the path, let Claude read</td></tr>
+<tr><td>Long CLAUDE.md with obvious things</td><td>Keep only non-obvious conventions</td></tr>
+<tr><td>Using Opus for formatting</td><td>Use Haiku (3x cheaper, same result)</td></tr>
+<tr><td>Declaring fixed before running tests</td><td>Run tests first, then report</td></tr>
+<tr><td>Asking Claude to guess API signatures</td><td>"Check the docs/package.json first"</td></tr>
+<tr><td>Mixing unrelated tasks in one session</td><td>/clear between them</td></tr>
+<tr><td>Letting context hit 90%+</td><td>Run strategic-compact at 70%</td></tr>
+<tr><td>One big vague question</td><td>Break into specific sub-questions</td></tr>
+<tr><td>"It doesn't work"</td><td>Describe what specifically fails</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="ct2" style="margin:16px 0 8px">Tips</div>
+<div class="cl g" style="margin-bottom:8px"><p>Always run <code>superpowers:verification-before-completion</code> before claiming any fix is done.</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>Use <code>mp-diagnose</code> for any bug before attempting a fix. Never go straight to editing.</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>The feedback loop is the highest-leverage pattern. Always give Claude a way to verify its own work.</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>Use <code>mp-caveman</code> when context is heavy and you just need fast answers — no prose needed.</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>Invoke skills explicitly by name. Claude won't auto-use them unless triggered or invoked.</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>Break big tasks into small ones with a verifiable acceptance criterion per step.</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>Use subagents for work you want a fresh, unbiased perspective on (code review, security audit).</p></div>
+<div class="cl g" style="margin-bottom:8px"><p>Run <code>/cheatsheet</code> after installing new skills to keep this file current.</p></div>
+
 </section>
 
 </main>
