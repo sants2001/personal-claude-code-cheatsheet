@@ -1,80 +1,167 @@
+<div align="center">
+
 # claude-cheatsheet
 
-A Claude Code skill that generates a **personal, self-updating HTML cheat sheet** from your live setup. Works for any Claude Code user — no configuration required.
+**A self-updating HTML reference for every Claude Code user**
 
-Every time you run `/cheatsheet`, it re-reads your current session and rewrites the file. New skills installed? Run it again.
+<br />
 
-## Install
+[![Install](https://img.shields.io/badge/install-npx%20skills%20add-58a6ff?style=flat-square&logo=npm)](https://github.com/sants2001/claude-cheatsheet)
+[![Skills](https://img.shields.io/badge/covers-500%2B%20skills-56d364?style=flat-square)](https://github.com/sants2001/claude-cheatsheet)
+[![Tabs](https://img.shields.io/badge/8%20tabs-shortcuts%20%E2%86%92%20meta-e3b341?style=flat-square)](https://github.com/sants2001/claude-cheatsheet)
+[![Offline](https://img.shields.io/badge/offline-capable-bc8cff?style=flat-square)](https://github.com/sants2001/claude-cheatsheet)
+[![License](https://img.shields.io/badge/license-MIT-8b949e?style=flat-square)](./LICENSE)
 
 ```bash
 npx skills add sants2001/claude-cheatsheet
 ```
 
-Or manually copy `SKILL.md` to `~/.claude/skills/cheatsheet/SKILL.md`.
+> *"I kept forgetting my own shortcuts. Now I just open one file."*
 
-## Usage
-
-```
-/cheatsheet          # Full regenerate from current setup
-/cheatsheet update   # Same as above
-/cheatsheet open     # Open existing file in browser
-```
-
-## What it generates
-
-A single self-contained HTML file (`~/Claude Code/cheatsheet.html` or `~/Desktop/claude-cheatsheet.html`) with 8 tabs:
-
-| Tab | Contents |
-|---|---|
-| **Shortcuts** | Keybindings, CLI flags, power patterns |
-| **Skills** | All installed skills in collapsible subcategories with copy buttons |
-| **Prompt Patterns** | Ready-to-copy prompts by context (debugging, TDD, reviews, autonomous) |
-| **Precision** | Surgical edit/debug techniques, exact error format, stopping guesswork |
-| **Tokens** | Token-saving commands, model routing for cost, lean-ctx mode guide |
-| **Model Routing** | Opus/Sonnet/Haiku task tables from your model-routing.md |
-| **Full Catalog** | Filterable dense table of every installed skill |
-| **How Claude Works** | Meta insights: context window, hallucination, thinking modes, feedback loops, anti-patterns, suggestions |
-
-## The "How Claude Works" tab
-
-This is what makes the cheat sheet more than a reference doc. It covers:
-
-- **Context window mechanics** — primacy/recency, the 70% degradation cliff, why long CLAUDE.md is wasteful
-- **How Claude reads requests** — task-category inference, how to override defaults
-- **Hallucination triggers** — what specifically causes them, mitigation rules
-- **Thinking modes** — when extended thinking helps vs. wastes tokens
-- **Feedback loops** — the single highest-leverage pattern for better Claude output
-- **Subagents and parallel work** — protecting your context window, tracer-first rule
-- **Anti-patterns table** — 10 common mistakes and what to do instead
-- **Suggestions** — actionable tips based on your installed skill count and setup
-
-## Personal to you
-
-When you have CLAUDE.md files, the cheat sheet reads them for:
-- Your name and stack (framework, UI lib, auth, DB)
-- Proactive trigger table (message patterns → skill auto-invocations)
-- Model routing rules
-- Autonomy and approval policies
-
-Without CLAUDE.md files, it uses generic defaults. The skill works for anyone.
-
-## Design
-
-- Dark GitHub theme (`#0d1117` bg, `#58a6ff` accent)
-- No external dependencies — opens offline
-- Global search across all tabs (Escape to clear)
-- Copy-to-clipboard on every row
-- Mobile responsive
-- Collapsible skill categories with count badges
-
-## Example output
-
-See [`example.html`](./example.html) — generated from a setup with 560+ installed skills.
-
-## Keeping it current
-
-After installing new skills, run `/cheatsheet` again. The output always reflects the live session's skill list.
+</div>
 
 ---
 
-Built with [Claude Code](https://claude.ai/claude-code).
+## Why I Built This
+
+I had 500+ skills installed, a dozen keybindings I kept forgetting, and no single place to see what Claude Code could actually do.
+
+Every "getting started" guide lists the obvious stuff. Nothing showed me:
+- Which of my 500+ skills to invoke for a given task
+- Why Claude hallucinates and what specifically triggers it
+- When extended thinking actually helps vs. wastes tokens
+- What the anti-patterns look like so I can stop doing them
+
+So I wrote a skill that reads your live session, reads your `CLAUDE.md`, and generates a single offline HTML file with everything in it. Run `/cheatsheet` any time to refresh it.
+
+— Santino
+
+---
+
+## How It Works
+
+**1. Install the skill**
+
+```bash
+npx skills add sants2001/claude-cheatsheet
+```
+
+**2. Run it inside Claude Code**
+
+```
+/cheatsheet
+```
+
+Claude reads your live skill list from the session, your `CLAUDE.md` files if they exist, and your model routing rules. It writes a single self-contained HTML file to `~/Claude Code/cheatsheet.html` (or `~/Desktop/claude-cheatsheet.html`), then opens it automatically.
+
+**3. Get a personal reference that reflects your actual setup**
+
+Not a generic guide. Your installed skills, your name, your stack, your trigger table.
+
+**4. Re-run after installing new skills**
+
+The output always reflects the current session. New plugin installed? Run `/cheatsheet` again. It rewrites the file.
+
+---
+
+## Getting Started
+
+```bash
+npx skills add sants2001/claude-cheatsheet
+```
+
+Or copy `SKILL.md` manually to `~/.claude/skills/cheatsheet/SKILL.md`.
+
+---
+
+## Commands
+
+| Command | What happens |
+|---|---|
+| `/cheatsheet` | Full regenerate from current session |
+| `/cheatsheet update` | Same as above |
+| `/cheatsheet open` | Open the existing file in your browser |
+
+---
+
+## What's Inside (8 Tabs)
+
+| Tab | What you get |
+|---|---|
+| **Shortcuts** | Every keybinding, CLI flag, and power pattern — rendered as `<kbd>` elements |
+| **Skills** | All your installed skills, organized into 30+ subcategories, each row copyable |
+| **Prompt Patterns** | 14 ready-to-copy prompts for debugging, TDD, review, and autonomous work |
+| **Precision** | Surgical edit techniques, the exact error format that works, stopping guesswork |
+| **Tokens** | Token-saving commands, model routing for cost, context hygiene do/don't list |
+| **Model Routing** | Opus / Sonnet / Haiku task tables from your `model-routing.md` |
+| **Full Catalog** | Filterable dense table of every installed skill with category badges |
+| **How Claude Works** | Context window mechanics, hallucination triggers, thinking modes, feedback loops, anti-patterns, suggestions |
+
+---
+
+## Why It Works
+
+**Reads from the live session, not a static file.**
+The skills list in the cheat sheet comes from the actual `<system-reminder>` in your Claude Code session — not from scraping a directory. If you installed a skill 10 minutes ago, it's already in the output.
+
+**No config required.**
+Works for any Claude Code user out of the box. Personal details (name, stack, trigger table) are pulled from `CLAUDE.md` if present. Without it, the skill uses clean generic defaults.
+
+**Offline-capable, no external dependencies.**
+The output is a single self-contained HTML file. No CDN, no `fetch()` calls, no internet required. The dark GitHub theme loads instantly from inline CSS.
+
+---
+
+## Personal to You
+
+When `~/.claude/CLAUDE.md` or `~/CLAUDE.md` exists, the cheat sheet reads them for:
+
+- Your name and handle
+- Your stack (framework, UI lib, auth, DB)
+- Your proactive trigger table (message patterns → skill invocations)
+- Your model routing rules
+- Your autonomy and approval policies
+
+Without those files, it falls back to sensible defaults. The skill is designed to be useful either way.
+
+---
+
+## Design
+
+```
+bg      #0d1117   (GitHub dark)
+surface #161b22
+accent  #58a6ff
+text    #e6edf3
+mono    SF Mono / Fira Code
+```
+
+- Global search across all tabs (Escape to clear)
+- Copy-to-clipboard on every row
+- Collapsible skill categories with count badges
+- Mobile responsive
+- Prints cleanly
+
+---
+
+## Example Output
+
+See [`example.html`](./example.html) — generated from a setup with 560+ installed skills.
+
+---
+
+## Keeping It Current
+
+Install new skills → run `/cheatsheet` → the file updates.
+
+That's it.
+
+---
+
+<div align="center">
+
+Built with [Claude Code](https://claude.ai/claude-code) · [MIT License](./LICENSE)
+
+*Run `/cheatsheet`. See what you've been missing.*
+
+</div>
