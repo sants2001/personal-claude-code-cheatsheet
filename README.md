@@ -27,7 +27,7 @@ npx skills add sants2001/personal-claude-code-cheatsheet
 I had 500+ skills installed, a dozen keybindings I kept forgetting, and no single place to see what Claude Code could actually do.
 
 Every "getting started" guide lists the obvious stuff. Nothing showed me:
-- Which of my 500+ skills to invoke for a given task
+- Which of my 100+ skills to invoke for a given task
 - Why Claude hallucinates and what specifically triggers it
 - When extended thinking actually helps vs. wastes tokens
 - What the anti-patterns look like so I can stop doing them
