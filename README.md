@@ -24,7 +24,7 @@ npx skills add sants2001/personal-claude-code-cheatsheet
 
 ## Why I Built This
 
-I had 500+ skills installed, a dozen keybindings I kept forgetting, and no single place to see what Claude Code could actually do.
+I had 100+ skills installed, a dozen keybindings I kept forgetting, and no single place to see what Claude Code could actually do.
 
 Every "getting started" guide lists the obvious stuff. Nothing showed me:
 - Which of my 100+ skills to invoke for a given task
