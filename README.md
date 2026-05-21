@@ -1,19 +1,19 @@
 <div align="center">
 
-# claude-cheatsheet
+# Personal Claude Code Cheat Sheet
 
 **A self-updating HTML reference for every Claude Code user**
 
 <br />
 
-[![Install](https://img.shields.io/badge/install-npx%20skills%20add-58a6ff?style=flat-square&logo=npm)](https://github.com/sants2001/claude-cheatsheet)
-[![Skills](https://img.shields.io/badge/covers-500%2B%20skills-56d364?style=flat-square)](https://github.com/sants2001/claude-cheatsheet)
-[![Tabs](https://img.shields.io/badge/8%20tabs-shortcuts%20%E2%86%92%20meta-e3b341?style=flat-square)](https://github.com/sants2001/claude-cheatsheet)
-[![Offline](https://img.shields.io/badge/offline-capable-bc8cff?style=flat-square)](https://github.com/sants2001/claude-cheatsheet)
+[![Install](https://img.shields.io/badge/install-npx%20skills%20add-58a6ff?style=flat-square&logo=npm)](https://github.com/sants2001/personal-claude-code-cheatsheet)
+[![Skills](https://img.shields.io/badge/covers-500%2B%20skills-56d364?style=flat-square)](https://github.com/sants2001/personal-claude-code-cheatsheet)
+[![Tabs](https://img.shields.io/badge/8%20tabs-shortcuts%20%E2%86%92%20meta-e3b341?style=flat-square)](https://github.com/sants2001/personal-claude-code-cheatsheet)
+[![Offline](https://img.shields.io/badge/offline-capable-bc8cff?style=flat-square)](https://github.com/sants2001/personal-claude-code-cheatsheet)
 [![License](https://img.shields.io/badge/license-MIT-8b949e?style=flat-square)](./LICENSE)
 
 ```bash
-npx skills add sants2001/claude-cheatsheet
+npx skills add sants2001/personal-claude-code-cheatsheet
 ```
 
 > *"I kept forgetting my own shortcuts. Now I just open one file."*
@@ -43,7 +43,7 @@ So I wrote a skill that reads your live session, reads your `CLAUDE.md`, and gen
 **1. Install the skill**
 
 ```bash
-npx skills add sants2001/claude-cheatsheet
+npx skills add sants2001/personal-claude-code-cheatsheet
 ```
 
 **2. Run it inside Claude Code**
@@ -67,7 +67,7 @@ The output always reflects the current session. New plugin installed? Run `/chea
 ## Getting Started
 
 ```bash
-npx skills add sants2001/claude-cheatsheet
+npx skills add sants2001/personal-claude-code-cheatsheet
 ```
 
 Or copy `SKILL.md` manually to `~/.claude/skills/cheatsheet/SKILL.md`.
